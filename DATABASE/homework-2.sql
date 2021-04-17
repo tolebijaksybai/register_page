@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 14 2021 г., 00:53
+-- Время создания: Апр 17 2021 г., 19:29
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.2.34
 
@@ -39,11 +39,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (8, 'tolebi@gmail.com', 'secret'),
-(9, 'aibek@mail.ru', '123'),
-(10, 'ztolebi@mail.ru', '$2y$10$YJQG8bA0FwoZK4NbwvsvVe1scmonlWG6eOg7biLZeYDCnhhQbNJti'),
-(13, 'admin@mail.ru', '$2y$10$TCh0AO8gMeu6jIcmOTZehufQ6gTTiuxrYc7zYZKEp477ux9nBUba.'),
-(15, 'test@gmail.com', '$2y$10$8pPw6Vsbmem9IS5G1753feKg2AjwOkPw.s8qccUacjvpehg7S017q'),
-(18, 'tolebizaksybaj@gmail.com', '$2y$10$miQs6FWHqBQ61y5D8qennu4mxujdtAN3k96B6tXISpvUKwMFQBXmm');
+(21, 'ztolebi@mail.ru', '$2y$10$sPP7cfpsz3EaIo87vdBTeepfHDrqEhLP9UKiZbHegWUek6ybiH836'),
+(25, 'admin@admin.com', '$2y$10$j3HyPsW1j532b4oAzp/LlOfxhN1codgqrGD3uHnt2T76bTymo83PO');
 
 --
 -- Индексы сохранённых таблиц
@@ -63,7 +60,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
