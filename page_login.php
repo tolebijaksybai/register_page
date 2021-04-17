@@ -1,6 +1,6 @@
 <?php session_start();
-
-require_once "functions.php"; ?>
+require_once "functions.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,11 +40,10 @@ require_once "functions.php"; ?>
 		<div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
 
 
-			<?php if (isset($_SESSION['success'])) {
-				echo display_flash_message('success');
-			} ?>
+			<?php echo display_flash_message('danger'); ?>
+			<?php echo display_flash_message('success'); ?>
 
-			<form action="register_check.php" method="post">
+			<form action="authorization_check.php" method="post">
 
 				<div class="form-group">
 					<label class="form-label" for="username">Email</label>

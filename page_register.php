@@ -65,11 +65,7 @@ require_once "functions.php"; ?>
 							<div class="col-xl-6 ml-auto mr-auto">
 								<div class="card p-4 rounded-plus bg-faded">
 
-									<?php
-									if (isset($_SESSION['danger'])) {
-										echo display_flash_message('danger');
-									}
-									?>
+									<?php echo display_flash_message('danger'); ?>
 
 									<form id="js-login" novalidate="" action="register_check.php" method="POST">
 										<div class="form-group">

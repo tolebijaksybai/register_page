@@ -1,6 +1,15 @@
 <?php
 
-function get_email_check($email)
+
+function get_password_check($result,  $password)
+{
+	$password_hash = password_verify($password, $result['password']);
+
+	return $password_hash;
+}
+
+
+function get_email($email)
 {
 	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
 
@@ -10,6 +19,7 @@ function get_email_check($email)
 
 	return $result;
 }
+
 
 function redirect_to($url)
 {
@@ -34,7 +44,7 @@ function add_user($email, $password)
 }
 function display_flash_message($name)
 {
-	if (isset($name) || $name !== "") {
+	if (isset($_SESSION[$name])) {
 		$message = "<div class='alert alert-{$name} text-dark' role='alert'>
 					<strong>Уведомление! </strong> {$_SESSION[$name]}
 				</div>";
