@@ -222,8 +222,6 @@ is_not_logged();
 					</div>
 				</div>
 
-
-
 			<?php endif; ?>
 
 			<!-- <div class="col-xl-4" hidden>
