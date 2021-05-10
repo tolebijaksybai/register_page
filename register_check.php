@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = $_SESSION['email'] = $_POST['email'];
+$password = $_SESSION['password'] = $_POST['password'];
+
 
 require_once "functions.php";
 

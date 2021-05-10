@@ -1,24 +1,24 @@
 <?php
+function autorization($email, $password)
+{
+	if (!get_user($email)) {
+		set_flash_message("danger", "Такого ползователя не найдено");
+		redirect_to("page_login.php");
+		exit();
+	} else if (!get_password_check(get_user($email), $password)) {
+		set_flash_message("danger", "Пароль не верный");
+		redirect_to('page_login.php');
+		exit();
+	} else {
+		$_SESSION["user"] = $email;
+	}
+}
 
 function get_password_check($result,  $password)
 {
 	$password_hash = password_verify($password, $result['password']);
-
 	return $password_hash;
 }
-
-
-function get_user($email)
-{
-	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
-
-	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-	$stmt->execute([':username' => $email]);
-	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-	return $result;
-}
-
 
 function redirect_to($url)
 {
@@ -40,7 +40,63 @@ function add_user($email, $password)
 		':role' => "user"
 	]);
 
-	return $stmt;
+	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+	$stmt->execute([':username' => $email]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	return $result["id"];
+}
+
+function edit_information($id, $work, $phone, $address)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE `users` SET `work`=:work,`phone`=:phone,`address`=:address WHERE :id");
+	$stmt->execute([
+		":work" => $work,
+		':phone' => $phone,
+		':address' => $address,
+		':id' => $id
+	]);
+
+	return true;
+}
+
+function set_status($id, $status)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE users SET status =:status WHERE id = :id");
+	$stmt->execute([
+		':status' => $status,
+		':id' => $id
+	]);
+
+	return true;
+}
+
+function upload_image($id, $img_src)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE users SET img_src =:img_src WHERE id = :id");
+	$stmt->execute([
+		':img_src' => $img_src,
+		':id' => $id
+	]);
+
+	return true;
+}
+
+function add_social_links($telegram, $instagram, $vk, $id)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE users SET telegram =:telegram, instagram=:instagram, vk=:vk WHERE id = :id");
+	$stmt->execute([
+		':telegram' => $telegram,
+		':instagram' => $instagram,
+		':vk' => $vk,
+		':id' => $id
+	]);
+
+	return true;
 }
 
 function display_flash_message($name)
@@ -81,7 +137,7 @@ function is_admin($email)
 
 function delate_session($session)
 {
-	unset($_SESSION[$session]);
+	unset($_SESSION["$session"]);
 }
 
 
@@ -92,6 +148,17 @@ function get_users()
 	$stmt = $pdo->prepare("SELECT * FROM users");
 	$stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	return $result;
+}
+
+function get_user($email)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+
+	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+	$stmt->execute([':username' => $email]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	return $result;
 }
