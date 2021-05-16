@@ -5,10 +5,12 @@ require_once "functions.php";
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 
+
 if (!autorization($email, $password) && !is_admin($_SESSION['user'])) {
 	redirect_to('page_login.php');
 	exit();
 }
+
 
 ?>
 <!DOCTYPE html>

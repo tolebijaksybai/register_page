@@ -11,6 +11,7 @@ function autorization($email, $password)
 		exit();
 	} else {
 		$_SESSION["user"] = $email;
+		return true;
 	}
 }
 
@@ -50,8 +51,23 @@ function add_user($email, $password)
 function edit_information($id, $work, $phone, $address)
 {
 	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
-	$stmt = $pdo->prepare("UPDATE `users` SET `work`=:work,`phone`=:phone,`address`=:address WHERE :id");
+	$stmt = $pdo->prepare("UPDATE `users` SET `work`=:work,`phone`=:phone,`address`=:address WHERE id=:id");
 	$stmt->execute([
+		":work" => $work,
+		':phone' => $phone,
+		':address' => $address,
+		':id' => $id
+	]);
+
+	return true;
+}
+
+function edit_info($id, $fullname, $work, $phone, $address)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE `users` SET `fullname`=:fullname,`work`=:work,`phone`=:phone,`address`=:address WHERE id=:id");
+	$stmt->execute([
+		":fullname" => $fullname,
 		":work" => $work,
 		':phone' => $phone,
 		':address' => $address,
@@ -140,7 +156,6 @@ function delate_session($session)
 	unset($_SESSION["$session"]);
 }
 
-
 function get_users()
 {
 	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
@@ -161,4 +176,37 @@ function get_user($email)
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	return $result;
+}
+
+function get_user_by_id($id)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+
+	$stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+	$stmt->execute([':id' => $id]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	return $result;
+}
+function get_id_by_email($email)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+
+	$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+	$stmt->execute([':username' => $email]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	return $result["id"];
+}
+function is_author($logger_user_id, $edit_user_id)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+
+	$stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+	$stmt->execute([':id' => $logger_user_id]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	if ((int)$result["id"] === $edit_user_id) {
+		return true;
+	}
 }
