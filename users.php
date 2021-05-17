@@ -36,6 +36,9 @@ is_not_logged();
 				<li class="nav-item active">
 					<a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
 				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="page_profile.php">Профиль <span class="sr-only">(current)</span></a>
+				</li>
 			</ul>
 
 			<ul class="navbar-nav ml-auto">
