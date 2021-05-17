@@ -210,3 +210,16 @@ function is_author($logger_user_id, $edit_user_id)
 		return true;
 	}
 }
+
+function edit_credentials($id, $username, $password)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("UPDATE `users` SET `username`=:username,`password`=:password WHERE id=:id");
+	$stmt->execute([
+		":username" => $username,
+		':password' => password_hash($password, PASSWORD_DEFAULT),
+		':id' => $id
+	]);
+
+	return true;
+}

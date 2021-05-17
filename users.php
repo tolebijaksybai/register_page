@@ -117,13 +117,13 @@ is_not_logged();
 											<a class="dropdown-item" href="edit.php?edit=<?= $result["id"] ?>">
 												<i class="fa fa-edit"></i>
 												Редактировать</a>
-											<a class="dropdown-item" href="security.html?security=<?= $result["id"] ?>">
+											<a class="dropdown-item" href="security.php?security=<?= $result["id"] ?>">
 												<i class="fa fa-lock"></i>
 												Безопасность</a>
-											<a class="dropdown-item" href="status.html?status=<?= $result["id"] ?>">
+											<a class="dropdown-item" href="status.php?status=<?= $result["id"] ?>">
 												<i class="fa fa-sun"></i>
 												Установить статус</a>
-											<a class="dropdown-item" href="media.html?media=<?= $result["id"] ?>">
+											<a class="dropdown-item" href="media.php?media=<?= $result["id"] ?>">
 												<i class="fa fa-camera"></i>
 												Загрузить аватар
 											</a>
@@ -194,13 +194,13 @@ is_not_logged();
 										<a class="dropdown-item" href="edit.php?edit=<?= $result["id"] ?>">
 											<i class="fa fa-edit"></i>
 											Редактировать</a>
-										<a class="dropdown-item" href="security.html?security=<?= $result["id"] ?>">
+										<a class="dropdown-item" href="security.php?security=<?= $result["id"] ?>">
 											<i class="fa fa-lock"></i>
 											Безопасность</a>
-										<a class="dropdown-item" href="status.html?status=<?= $result["id"] ?>">
+										<a class="dropdown-item" href="status.php?status=<?= $result["id"] ?>">
 											<i class="fa fa-sun"></i>
 											Установить статус</a>
-										<a class="dropdown-item" href="media.html?media=<?= $result["id"] ?>">
+										<a class="dropdown-item" href="media.php?media=<?= $result["id"] ?>">
 											<i class="fa fa-camera"></i>
 											Загрузить аватар
 										</a>
