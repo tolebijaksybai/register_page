@@ -22,14 +22,20 @@ if (!is_admin($email)) {
 	}
 }
 
+// Получаю путь картинку 
+$img_src = get_user_by_id($delate_id)['img_src'];
+
 if ($delate_id !== $logger_user_id) {
-	delate($delate_id);
+	// Удаляет ползователя и картинку
+	delate($delate_id, $img_src);
 	set_flash_message("success", "Пользователь удален");
 	redirect_to("users.php");
 	exit();
 }
 
-delate($delate_id);
+// Удаляет себе и картинку
+delate($delate_id, $img_src);
+
 session_destroy();
 redirect_to("page_login.php");
 exit();

@@ -71,9 +71,11 @@ $logger_user_id = (int)get_id_by_email($email);
 								<h2>Текущий аватар</h2>
 							</div>
 
+							<?php $user = get_user_by_id($edit_user_id); ?>
+
 							<div class="panel-content">
-								<?php if (is_admin($email)) : ?>
-									<?php $result = get_user_by_id($edit_user_id); ?>
+								<?php if (is_admin($email) || $_SESSION['user'] === $user['username']) : ?>
+
 									<div class="form-group">
 										<img src="<?= has_image($edit_user_id) ?>" alt="" class="img-responsive" width="200">
 									</div>
@@ -87,27 +89,11 @@ $logger_user_id = (int)get_id_by_email($email);
 										<input type="file" id="example-fileinput" class="form-control-file" name="img_src">
 									</div>
 								<?php else : ?>
-									<?php if (is_author($logger_user_id, $edit_user_id)) : ?>
-										<?php $result = get_user_by_id($logger_user_id); ?>
-										<div class="form-group">
-											<img src="<?= has_image($edit_user_id) ?>" alt="" class="img-responsive" width="200">
-										</div>
-
-										<div class="form-group" hidden>
-											<input type="text" id="simpleinput" name="id" class="form-control" value="<?= $edit_user_id ?>">
-										</div>
-
-										<div class="form-group">
-											<label class="form-label" for="example-fileinput">Выберите аватар</label>
-											<input type="file" id="example-fileinput" class="form-control-file" name="img_src">
-										</div>
-									<?php else : ?>
-										<?php
-										set_flash_message("danger", "Можно редактировать только свой профиль");
-										redirect_to("users.php");
-										exit();
-										?>
-									<?php endif; ?>
+									<?php
+									set_flash_message("danger", "Можно редактировать только свой профиль");
+									redirect_to("users.php");
+									exit();
+									?>
 								<?php endif; ?>
 								<div class="col-md-12 mt-3 d-flex flex-row-reverse">
 									<button type="submit" class="btn btn-warning">Загрузить</button>

@@ -89,8 +89,14 @@ function set_status($id, $status)
 	return true;
 }
 
-function upload_image($id, $img_src)
+function upload_image($id, $image)
 {
+	$imgName =  $image['name'];
+	$imgTmpName = $image['tmp_name'];
+
+	$img_src = "img/demo/avatars/" . time() . $imgName;
+	move_uploaded_file($imgTmpName,  $img_src);
+
 	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
 	$stmt = $pdo->prepare("UPDATE users SET img_src =:img_src WHERE id = :id");
 	$stmt->execute([
@@ -239,13 +245,15 @@ function has_image($user_id)
 	}
 }
 
-function delate($user_id)
+function delate($user_id, $img_src)
 {
 	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
 	$stmt = $pdo->prepare("DELETE FROM `users` WHERE id = :id");
 	$stmt->execute([
 		':id' => $user_id
 	]);
+
+	unlink($img_src);
 
 	return true;
 }

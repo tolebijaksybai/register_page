@@ -12,8 +12,6 @@ $add_password  = $_POST['add_password'];
 $status = $_POST['status'];
 
 $image = $_FILES['img_src'];
-$imageName =  $image['name'];
-$imageTmpName = $image['tmp_name'];
 
 $telegram  = $_POST['link_vkontakte'];
 $instagram = $_POST['link_telegram'];
@@ -29,10 +27,8 @@ $id = add_user($add_email, $add_password);
 edit_information($id, $work, (int)$phone, $address);
 set_status($id, $status);
 
-$img_src = "img/demo/avatars/" . time() . $imageName;
-move_uploaded_file($imageTmpName,  $img_src);
-
-upload_image($id, $img_src);
+// Загружаю картинку в папку avatars и сохраняю путь к Базу Данных
+upload_image($id, $image);
 
 add_social_links($telegram, $instagram, $vk, $id);
 
