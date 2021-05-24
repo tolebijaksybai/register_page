@@ -68,18 +68,19 @@ $logger_user_id = (int)get_id_by_email($email);
 							<div class="panel-hdr">
 								<h2>Обновление эл. адреса и пароля</h2>
 							</div>
-							<?php if (is_admin($email)) : ?>
-								<?php $result = get_user_by_id($edit_user_id); ?>
+							<?php $user = get_user_by_id($edit_user_id); ?>
+							<?php if (is_admin($email) || $_SESSION['user'] === $user['username']) : ?>
+
 
 								<div class="panel-content">
 									<!-- email -->
 									<div class="form-group">
 										<label class="form-label" for="simpleinput">Email</label>
-										<input type="text" name="email" id="simpleinput" class="form-control" value="<?= $result["username"] ?>">
+										<input type="text" name="email" id="simpleinput" class="form-control" value="<?= $user["username"] ?>">
 									</div>
 									<div class="form-group" hidden>
 										<label class="form-label" for="simpleinput">Id</label>
-										<input type="text" name="id" id="simpleinput" class="form-control" value="<?= $result["id"] ?>">
+										<input type="text" name="id" id="simpleinput" class="form-control" value="<?= $user["id"] ?>">
 									</div>
 
 									<!-- password -->
@@ -101,39 +102,11 @@ $logger_user_id = (int)get_id_by_email($email);
 								</div>
 
 							<?php else : ?>
-								<?php if (is_author($logger_user_id, $edit_user_id)) : ?>
-									<?php $result = get_user_by_id($logger_user_id); ?>
-									<div class="panel-content">
-										<!-- email -->
-										<div class="form-group">
-											<label class="form-label" for="simpleinput">Email</label>
-											<input type="text" name="email" id="simpleinput" class="form-control" value="<?= $result["username"] ?>">
-										</div>
-
-										<!-- password -->
-										<div class="form-group">
-											<label class="form-label" for="simpleinput">Пароль</label>
-											<input type="password" name="password" id="simpleinput" class="form-control">
-										</div>
-
-										<!-- password confirmation-->
-										<div class="form-group">
-											<label class="form-label" for="simpleinput">Подтверждение пароля</label>
-											<input type="password" id="simpleinput" class="form-control">
-										</div>
-
-
-										<div class="col-md-12 mt-3 d-flex flex-row-reverse">
-											<button type="submit" class="btn btn-warning">Изменить</button>
-										</div>
-									</div>
-								<?php else : ?>
-									<?php
-									set_flash_message("danger", "Можно редактировать только свой профиль");
-									redirect_to("users.php");
-									exit();
-									?>
-								<?php endif; ?>
+								<?php
+								set_flash_message("danger", "Можно редактировать только свой профиль");
+								redirect_to("users.php");
+								exit();
+								?>
 							<?php endif; ?>
 						</div>
 					</div>
