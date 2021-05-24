@@ -223,3 +223,29 @@ function edit_credentials($id, $username, $password)
 
 	return true;
 }
+
+function has_image($user_id)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+
+	$stmt = $pdo->prepare("SELECT img_src FROM users WHERE id = :id");
+	$stmt->execute([':id' => $user_id]);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	if (!empty($result["img_src"])) {
+		echo $result["img_src"];
+	} else {
+		echo 'img/demo/avatars/avatar-m.png';
+	}
+}
+
+function delate($user_id)
+{
+	$pdo = new PDO('mysql:host=localhost;dbname=homework-2', 'root', 'root');
+	$stmt = $pdo->prepare("DELETE FROM `users` WHERE id = :id");
+	$stmt->execute([
+		':id' => $user_id
+	]);
+
+	return true;
+}

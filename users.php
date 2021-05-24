@@ -4,6 +4,8 @@ require_once "functions.php";
 
 is_not_logged();
 
+// var_dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +129,7 @@ is_not_logged();
 												<i class="fa fa-camera"></i>
 												Загрузить аватар
 											</a>
-											<a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+											<a href="delate_user.php?delate_id=<?= $result['id'] ?>" class="dropdown-item" onclick="return confirm('are you sure?');">
 												<i class="fa fa-window-close"></i>
 												Удалить
 											</a>
@@ -204,7 +206,7 @@ is_not_logged();
 											<i class="fa fa-camera"></i>
 											Загрузить аватар
 										</a>
-										<a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+										<a href="delate_user.php?delate_id=<?= $result['id'] ?>" class="dropdown-item" onclick="return confirm('are you sure?');">
 											<i class="fa fa-window-close"></i>
 											Удалить
 										</a>

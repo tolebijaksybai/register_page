@@ -17,7 +17,6 @@ if ($email === $email_my) {
 		exit();
 	}
 	edit_credentials($id, $email, $password);
-	
 }
 
 set_flash_message("success", "Профиль успешно обновлен");
